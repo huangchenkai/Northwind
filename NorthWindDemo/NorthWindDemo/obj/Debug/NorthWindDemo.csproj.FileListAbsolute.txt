@@ -52,7 +52,6 @@ C:\Users\Kai Huang\Source\Repos\Northwind\NorthWindDemo\NorthWindDemo\bin\System
 C:\Users\Kai Huang\Source\Repos\Northwind\NorthWindDemo\NorthWindDemo\bin\System.Web.WebPages.Razor.xml
 C:\Users\Kai Huang\Source\Repos\Northwind\NorthWindDemo\NorthWindDemo\bin\Antlr3.Runtime.pdb
 C:\Users\Kai Huang\Source\Repos\Northwind\NorthWindDemo\NorthWindDemo\bin\Newtonsoft.Json.xml
-C:\Users\Kai Huang\Source\Repos\Northwind\NorthWindDemo\NorthWindDemo\obj\Debug\NorthWindDemo.csprojResolveAssemblyReference.cache
 C:\Users\Kai Huang\Source\Repos\Northwind\NorthWindDemo\NorthWindDemo\obj\Debug\NorthWindDemo.dll
 C:\Users\Kai Huang\Source\Repos\Northwind\NorthWindDemo\NorthWindDemo\obj\Debug\NorthWindDemo.pdb
 C:\Users\Kai Huang\Source\Repos\Northwind\NorthWindDemo\NorthWindDemo\bin\System.Net.Http.Formatting.dll
@@ -66,3 +65,6 @@ C:\Users\Kai Huang\Source\Repos\Northwind\NorthWindDemo\NorthWindDemo\bin\Autofa
 C:\Users\Kai Huang\Source\Repos\Northwind\NorthWindDemo\NorthWindDemo\bin\Autofac.xml
 C:\Users\Kai Huang\Source\Repos\Northwind\NorthWindDemo\NorthWindDemo\bin\Autofac.Integration.WebApi.pdb
 C:\Users\Kai Huang\Source\Repos\Northwind\NorthWindDemo\NorthWindDemo\bin\Autofac.Integration.WebApi.xml
+C:\Users\Kai Huang\Source\Repos\Northwind\NorthWindDemo\NorthWindDemo\obj\Debug\NorthWindDemo.csprojResolveAssemblyReference.cache
+C:\Users\Kai Huang\Source\Repos\Northwind\NorthWindDemo\NorthWindDemo\bin\Autofac.Integration.Mvc.dll
+C:\Users\Kai Huang\Source\Repos\Northwind\NorthWindDemo\NorthWindDemo\bin\Autofac.Integration.Mvc.xml

@@ -7,17 +7,27 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NorthWindDemo.Models;
+using NorthWindDemo.Models.Repository;
+using NorthWindDemo.Models.DAO;
 
 namespace NorthWindDemo.Controllers
 {
     public class Catagories1Controller : Controller
     {
-        private NorthwindEntities1 db = new NorthwindEntities1();
+        private readonly ICatagory_BLO _BO = null;
+    //    public Catagories1Controller()
+    //    : this(new Catagory_DAO(new NorthwindEntities1()))
+    //{
+    //    }
+        public Catagories1Controller(ICatagory_BLO BO)
+        {
+            _BO = BO;
+        }
 
         // GET: Catagories1
         public ActionResult Index()
         {
-            return View(db.Catagory.ToList());
+            return View(_BO.GetAll());
         }
 
         // GET: Catagories1/Details/5
@@ -27,7 +37,7 @@ namespace NorthWindDemo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Catagory catagory = db.Catagory.Find(id);
+            Catagory catagory = _BO.GetDetail(id).FirstOrDefault();
             if (catagory == null)
             {
                 return HttpNotFound();
@@ -43,15 +53,13 @@ namespace NorthWindDemo.Controllers
 
         // POST: Catagories1/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CategoryID,CategoryName,Description")] Catagory catagory)
         {
             if (ModelState.IsValid)
             {
-                db.Catagory.Add(catagory);
-                db.SaveChanges();
+                _BO.Create(catagory);
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +73,7 @@ namespace NorthWindDemo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Catagory catagory = db.Catagory.Find(id);
+            Catagory catagory = _BO.GetDetail(id).FirstOrDefault();
             if (catagory == null)
             {
                 return HttpNotFound();
@@ -82,8 +90,7 @@ namespace NorthWindDemo.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(catagory).State = EntityState.Modified;
-                db.SaveChanges();
+                _BO.Edit(catagory);
                 return RedirectToAction("Index");
             }
             return View(catagory);
@@ -96,7 +103,7 @@ namespace NorthWindDemo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Catagory catagory = db.Catagory.Find(id);
+            Catagory catagory = _BO.GetDetail(id).FirstOrDefault();
             if (catagory == null)
             {
                 return HttpNotFound();
@@ -109,19 +116,17 @@ namespace NorthWindDemo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Catagory catagory = db.Catagory.Find(id);
-            db.Catagory.Remove(catagory);
-            db.SaveChanges();
+            _BO.Delete(id);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }

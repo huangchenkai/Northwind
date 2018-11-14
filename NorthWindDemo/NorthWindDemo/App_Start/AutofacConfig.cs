@@ -1,11 +1,18 @@
 ﻿using Autofac;
+using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
+using NorthWindDemo.Models;
+using NorthWindDemo.Models.BLO;
+using NorthWindDemo.Models.DAO;
+using NorthWindDemo.Models.Repository;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Http;
+using System.Web.Mvc;
 
 namespace NorthWindDemo
 {
@@ -16,6 +23,8 @@ namespace NorthWindDemo
             // Base set-up
             var builder = new ContainerBuilder();
 
+            // Register your MVC controllers.
+            builder.RegisterControllers(Assembly.GetExecutingAssembly());
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly()).PropertiesAutowired();
 
@@ -32,36 +41,25 @@ namespace NorthWindDemo
 
 
             // Register dependencies
-            //SetUpRegistration(builder);
+            SetUpRegistration(builder);
 
 
             // Build registration.
             var container = builder.Build();
 
-            // Set the dependency resolver to be Autofac.
+            // Set the MVC dependency resolver to be Autofac
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            // Set the WebApi dependency resolver to be Autofac.
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
 
 
-        //private static void SetUpRegistration(ContainerBuilder builder)
-        //{
-        //    string As400 = ConfigurationManager.ConnectionStrings["As400"].ToString();
-        //    string Oracle = ConfigurationManager.ConnectionStrings["OracleDbContext"].ToString();
-
-
-        //    builder.Register(x => new iDB2Connection(As400))
-        //           .As<iDB2Connection>()
-        //           .InstancePerLifetimeScope();
-
-        //    builder.Register(x => new OracleConnection(Oracle))
-        //          .As<OracleConnection>()
-        //          .InstancePerLifetimeScope();
-
-        //    builder.RegisterType<Entities>().As<DbContext>().InstancePerRequest();
-
-
-
-        //}
+        private static void SetUpRegistration(ContainerBuilder builder)
+        {
+            builder.RegisterType<NorthwindEntities1>().As<DbContext>();
+            builder.RegisterType<Catagory_DAO>().As<ICatagory_DAO>();
+            builder.RegisterType<Catagory_BLO>().As<ICatagory_BLO>();
+        }
 
 
 
